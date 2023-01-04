@@ -10,7 +10,8 @@ this is a simple application for test
 * validation => formZ
 * dependency injection => getIt
 
-#Project structure
+# Project structure
+<pre>
 
 ├───assets    => contains assets like font and maybe image and etc 
 │   └───fonts
@@ -33,3 +34,5 @@ this is a simple application for test
 │   └───presentation => it has responsibility to render and hold files which are related to ui 
 ├───test
 
+
+</pre>
