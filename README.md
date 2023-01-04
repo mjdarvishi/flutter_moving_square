@@ -1,50 +1,35 @@
-# CRUD Code Test
+<h1> FLUTTER SIMPLE TEST CRUDE APPLICATION</h1>
 
-Please read each note very carefully!
-Feel free to add/change project structure to a clean architecture to your view.
-and if you are not able to work on FrontEnd project, you can add a Swagger UI
-in a new Front project.
+# General description
+this is a simple application for test
 
-Create a simple CRUD application with that implements the below model:
+# Technical description
+* architecture => clean architect.
+* state management => bloc
+* storage => floor
+* validation => formZ
+* dependency injection => getIt
 
-```
-Customer {
-	Firstname
-	Lastname
-	DateOfBirth
-	PhoneNumber
-	Email
-	BankAccountNumber
-}
-```
+#Project structure
 
-## Practices and patterns (Must)
+├───assets    => contains assets like font and maybe image and etc 
+│   └───fonts
+├───lib
+│   ├───config => holds route configuration and them config
+│   │   ├───routes
+│   │   └───themes
+│   ├───core  => all config files will save here like constant and etc
+│   │   └───utils
+│   ├───data  => its part of clean architect and will handle communication to storage via floor
+│   │   └───data_sources
+│   │       ├───local
+│   │       │   └───DAOs
+│   │       ├───models
+│   │       └───repositories
+│   ├───domain => domain layer handle logic of project 
+│   │   ├───entities
+│   │   ├───repositories
+│   │   └───usecase
+│   └───presentation => it has responsibility to render and hold files which are related to ui 
+├───test
 
-- [TDD](https://en.wikipedia.org/wiki/Test-driven_development)
-- [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
-- [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development): [Acceptance Test](https://en.wikipedia.org/wiki/Acceptance_testing)
-- Clean git commits that shows your work progress.
-
-## Clean Architecture (Must)
-
-<img src="./clean_architecture.png" max-width="250px" max-height="250px" />
-
-### Validations (Must)
-
-- During Create; validate the phone number to be a valid *mobile* number only (You can use [Google LibPhoneNumber](https://github.com/google/libphonenumber) to validate number at the backend).
-
-- A Valid email and a valid bank account number must be checked before submitting the form.
-
-- Customers must be unique in database: By `Firstname`, `Lastname` and `DateOfBirth`.
-
-- Email must be unique in the database.
-
-### Storage (Must)
-
-- Use database of choise to store data.
-
-- Store the phone number in a database with minimized space storage (choose `varchar`/`string`, or `Uint64` whichever store less space).
-
-### Submit your result
-
-Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com and then create a PR that only shows what you have changed in the project, it means you must make sure that my commits are not erased from the history.
