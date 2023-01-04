@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//this is the main class which is handle theme config
 class AppTheme {
   static ThemeData get light {
     return ThemeData(
