@@ -6,14 +6,14 @@ class AddCustomerState extends Equatable {
   final Account? accountNumber;
   final Email? email;
   final Mobile? mobile;
-  final String dateOfBirth;
+  final Birth? dateOfBirth;
 
   @override
   List<Object?> get props =>
       [firstName, lastName, accountNumber, email, mobile, dateOfBirth];
 
   const AddCustomerState(
-      {this.dateOfBirth = '',
+      {this.dateOfBirth ,
       this.mobile,
       this.email,
       this.accountNumber,
@@ -26,7 +26,7 @@ class AddCustomerState extends Equatable {
     Account? accountNumber,
     Email? email,
     Mobile? mobile,
-    String? dateOfBirth,
+    Birth? dateOfBirth,
   }) {
     return AddCustomerState(
         mobile: mobile ?? this.mobile,
