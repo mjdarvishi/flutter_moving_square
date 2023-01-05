@@ -7,7 +7,7 @@ import 'package:mc_crud_test/domain/entities/customer.dart';
 @dao
 abstract class CustomerDoa {
 
-  @Query('SELECT * FROM $customerTableName')
+  @Query('SELECT * FROM $customerTableName ORDER BY id DESC')
   Future<List<Customer>> getAllArticles();
 
   @Insert(onConflict: OnConflictStrategy.replace)

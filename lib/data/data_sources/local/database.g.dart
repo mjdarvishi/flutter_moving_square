@@ -142,7 +142,7 @@ class _$CustomerDoa extends CustomerDoa {
 
   @override
   Future<List<Customer>> getAllArticles() async {
-    return _queryAdapter.queryList('SELECT * FROM Customer',
+    return _queryAdapter.queryList('SELECT * FROM Customer ORDER BY id DESC',
         mapper: (Map<String, Object?> row) => Customer(
             row['firstname'] as String,
             row['lastname'] as String,
