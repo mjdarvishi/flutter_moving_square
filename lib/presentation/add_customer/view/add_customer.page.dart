@@ -99,9 +99,17 @@ class AddCustomerPage extends StatelessWidget {
                               ? 'Select Date Of Birth'
                               : 'Edit date of birth'),
                         ),
-                        const SizedBox(height: 10,),
-                        if(state.err!=null)
-                        Text(state.err!,style: const TextStyle(color: Colors.red,fontSize: 17,fontWeight: FontWeight.bold),)
+                        for (var item in state.err)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
                       ],
                     ),
                   ),
@@ -109,11 +117,11 @@ class AddCustomerPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: OutlinedButton(
                         onPressed: state.formZ.isValid
-                            ? (){
-                          context
-                              .read<AddCustomerBloc>()
-                              .add(SubmitEvent());
-                        }
+                            ? () {
+                                context
+                                    .read<AddCustomerBloc>()
+                                    .add(SubmitEvent());
+                              }
                             : null,
                         child: const Text('ADD CUSTOMER')),
                   )

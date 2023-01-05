@@ -8,7 +8,7 @@ class AddCustomerState extends Equatable {
   final Mobile? mobile;
   final Birth? dateOfBirth;
   final FormzStatus formZ;
-  final String ?err;
+  final List<String>err;
   @override
   List<Object?> get props =>
       [firstName, lastName, accountNumber, email, mobile, dateOfBirth,formZ,err];
@@ -18,7 +18,7 @@ class AddCustomerState extends Equatable {
       this.mobile,
       this.email,
       this.accountNumber,
-        this.err,
+        this.err=const [],
         this.formZ=FormzStatus.pure,
       this.lastName,
       this.firstName});
@@ -31,7 +31,7 @@ class AddCustomerState extends Equatable {
     Mobile? mobile,
     FormzStatus ?formZ,
     Birth? dateOfBirth,
-    String ?err
+    List<String> ?err
   }) {
     return AddCustomerState(
         mobile: mobile ?? this.mobile,

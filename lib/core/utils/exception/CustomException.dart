@@ -1,6 +1,6 @@
 
 class CustomException implements Exception {
-  final String desc;
+  final List<String> desc;
 
   CustomException(this.desc);
 }
