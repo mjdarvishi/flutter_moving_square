@@ -12,14 +12,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-            color: Colors.blue,
-            shape: BoxShape.circle
-        ),
-        child: const Icon(Icons.add, color: Colors.white,),
-      ),
+      floatingActionButton:
+      FloatingActionButton(
+        onPressed: () =>  Navigator.pushNamed(context, '/add'),
+      child: const Icon(Icons.add, color: Colors.white,)),
       body: BlocProvider(create: (context) =>
       injector<HomeBloc>()
         ..add(GetCustomerEvent()),
