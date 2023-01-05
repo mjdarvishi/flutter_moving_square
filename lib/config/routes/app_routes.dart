@@ -8,11 +8,11 @@ class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return _materialRoute(const HomePage());
+        return _materialRoute( HomePage());
       case '/add':
-        return _materialRoute(const AddCustomerPage());
+        return _materialRoute(AddCustomerPage(settings.arguments as VoidCallback));
       default:
-        return _materialRoute(const HomePage());
+        return _materialRoute( HomePage());
     }
   }
 

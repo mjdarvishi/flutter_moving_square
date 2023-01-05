@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Customer` (`id` INTEGER NOT NULL, `firstname` TEXT NOT NULL, `lastname` TEXT NOT NULL, `dateOfBirth` TEXT NOT NULL, `phoneNumber` TEXT NOT NULL, `email` TEXT NOT NULL, `bankAccountNumber` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Customer` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `firstname` TEXT NOT NULL, `lastname` TEXT NOT NULL, `dateOfBirth` TEXT NOT NULL, `phoneNumber` TEXT NOT NULL, `email` TEXT NOT NULL, `bankAccountNumber` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -150,7 +150,7 @@ class _$CustomerDoa extends CustomerDoa {
             row['phoneNumber'] as String,
             row['email'] as String,
             row['bankAccountNumber'] as String,
-            id: row['id'] as int));
+            id: row['id'] as int?));
   }
 
   @override

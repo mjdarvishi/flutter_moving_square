@@ -10,7 +10,9 @@ import 'package:mc_crud_test/presentation/add_customer/add_customer_bloc/add_cus
 import 'package:mc_crud_test/presentation/add_customer/view/custom_text_field.dart';
 
 class AddCustomerPage extends StatelessWidget {
-  const AddCustomerPage({Key? key}) : super(key: key);
+  final VoidCallback callback;
+
+  const AddCustomerPage(this.callback);
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +110,7 @@ class AddCustomerPage extends StatelessWidget {
                         onPressed: state.formZ.isValid
                             ? () => context
                                 .read<AddCustomerBloc>()
-                                .add(SubmitEvent())
+                                .add(SubmitEvent(callback))
                             : null,
                         child: const Text('ADD CUSTOMER')),
                   )

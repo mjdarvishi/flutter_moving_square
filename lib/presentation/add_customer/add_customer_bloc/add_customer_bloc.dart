@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
 import 'package:mc_crud_test/core/utils/validation/account.dart';
 import 'package:mc_crud_test/core/utils/validation/birth.dart';
@@ -27,8 +28,8 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
     on<SubmitEvent>(_submit);
   }
 
-  void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) {
-    _addCustomersUseCase(
+  void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) async{
+   await _addCustomersUseCase(
         params: Customer(
             state.firstName!.value,
             state.lastName!.value,
@@ -36,6 +37,7 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
             state.mobile!.value,
             state.email!.value,
             state.accountNumber!.value));
+   event.callback();
   }
 
   void _fistNameChange(

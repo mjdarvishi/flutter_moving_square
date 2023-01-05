@@ -43,5 +43,7 @@ class OnDateOfBirthNumberChangeEvent extends AddCustomerEvent {
   const OnDateOfBirthNumberChangeEvent(this.value);
 }
 class SubmitEvent extends AddCustomerEvent{
+VoidCallback callback;
 
+SubmitEvent(this.callback);
 }

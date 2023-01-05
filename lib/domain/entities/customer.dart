@@ -2,9 +2,8 @@ import 'package:floor/floor.dart';
 
 @entity
 class Customer {
-  @primaryKey
   @PrimaryKey(autoGenerate: true)
-  final int id;
+  final int? id;
   final String firstname;
   final String lastname;
   final String dateOfBirth;
@@ -13,5 +12,5 @@ class Customer {
   final String bankAccountNumber;
 
   Customer(this.firstname, this.lastname, this.dateOfBirth,
-      this.phoneNumber, this.email, this.bankAccountNumber,{this.id=0});
+      this.phoneNumber, this.email, this.bankAccountNumber,{this.id});
 }
