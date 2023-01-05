@@ -6,6 +6,7 @@ import 'dart:async';
 
 part 'database.g.dart';
 
+//configuration of floor
 @Database(version: 1, entities: [Customer])
 abstract class AppDatabase extends FloorDatabase {
   CustomerDoa get personDao;

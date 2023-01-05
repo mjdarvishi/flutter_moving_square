@@ -2,6 +2,7 @@ import 'package:floor/floor.dart';
 import 'package:mc_crud_test/domain/entities/customer.dart';
 import 'package:mc_crud_test/domain/repositories/customer_repository.dart';
 
+//implementation of CustomerRepository
 class CustomerRepositoryImpl implements CustomerRepository{
   final Database database;
 
