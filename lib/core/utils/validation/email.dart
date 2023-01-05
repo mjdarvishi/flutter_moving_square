@@ -1,38 +1,38 @@
 import 'package:formz/formz.dart';
 
-enum MobileValidationError { invalid,empty,persian}
+enum EmailValidationError { invalid,empty,persian}
 
-class Mobile extends FormzInput<String, MobileValidationError> {
-  const Mobile.pure() : super.pure('');
+class Email extends FormzInput<String, EmailValidationError> {
+  const Email.pure() : super.pure('');
 
-  const Mobile.dirty({String value = ''}) : super.dirty(value);
+  const Email.dirty({String value = ''}) : super.dirty(value);
   static final _tellRegex = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"
   );
 
   @override
-  MobileValidationError? validator(String? value) {
+  EmailValidationError? validator(String? value) {
     String input=value??'';
     if(input.isEmpty){
-      return MobileValidationError.empty;
+      return EmailValidationError.empty;
     }
     if(RegExp(r'^[۰۱۲۳۴۵۶۷۸۹]+$').hasMatch(input)) {
-      return MobileValidationError.persian;
+      return EmailValidationError.persian;
     }
     return _tellRegex.hasMatch(input)
         ? null
-        : MobileValidationError.invalid;
+        : EmailValidationError.invalid;
   }
 }
 
-extension Explanation on MobileValidationError {
+extension Explanation on EmailValidationError {
   String get name {
     switch(this){
-      case MobileValidationError.persian:
+      case EmailValidationError.persian:
         return 'Just use english number';
-      case MobileValidationError.invalid:
+      case EmailValidationError.invalid:
         return 'invalid email  format';
-      case MobileValidationError.empty:
+      case EmailValidationError.empty:
         return 'input number should not be empty';
     }
   }
