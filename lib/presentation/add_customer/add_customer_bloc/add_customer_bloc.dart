@@ -52,18 +52,20 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
 
   void _birthChange(
       OnDateOfBirthNumberChangeEvent event, Emitter<AddCustomerState> emit) {
-    final birthDay = Birth.dirty(value: event.value);
+    final birthDay = Birth.dirty(event.value);
     emit(state.copyWith(dateOfBirth: birthDay, formZ: _validation()));
   }
 
   FormzStatus _validation() {
+    if (state.dateOfBirth?.value == null) {
+      return FormzStatus.invalid;
+    }
     return Formz.validate([
       state.firstName ?? const Name.pure(),
       state.lastName ?? const Name.pure(),
       state.mobile ?? const Mobile.pure(),
       state.email ?? const Email.pure(),
       state.accountNumber ?? const Account.pure(),
-      state.dateOfBirth ?? const Birth.pure(),
     ]);
   }
 }

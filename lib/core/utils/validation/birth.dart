@@ -2,15 +2,13 @@ import 'package:formz/formz.dart';
 
 enum BirthValidationError {empty}
 
-class Birth extends FormzInput<String, BirthValidationError> {
-  const Birth.pure() : super.pure('');
+class Birth extends FormzInput<DateTime, BirthValidationError> {
 
-  const Birth.dirty({String value = ''}) : super.dirty(value);
+  const Birth.dirty(DateTime value) : super.dirty(value);
 
   @override
-  BirthValidationError? validator(String? value) {
-    String input=value??'';
-    if(input.isEmpty){
+  BirthValidationError? validator(DateTime? value) {
+    if(value==null){
       return BirthValidationError.empty;
     }
     return null;

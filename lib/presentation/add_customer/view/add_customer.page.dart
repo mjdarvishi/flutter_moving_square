@@ -6,6 +6,7 @@ import 'package:mc_crud_test/core/utils/validation/mobile.dart';
 import 'package:mc_crud_test/core/utils/validation/name.dart';
 import 'package:mc_crud_test/injector.dart';
 import 'package:mc_crud_test/presentation/add_customer/add_customer_bloc/add_customer_bloc.dart';
+import 'package:mc_crud_test/presentation/add_customer/view/custom_text_field.dart';
 
 class AddCustomerPage extends StatelessWidget {
   const AddCustomerPage({Key? key}) : super(key: key);
@@ -18,109 +19,97 @@ class AddCustomerPage extends StatelessWidget {
           child: BlocBuilder<AddCustomerBloc, AddCustomerState>(
             builder: (context, state) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text('Add New Customer'),
-                    ),
-                    // First name
-                    customTextField(
-                        (value) => context
-                            .read<AddCustomerBloc>()
-                            .add(OnFirstNameChangeEvent(value)),
-                        state.firstName?.value??'',
-                        state.firstName?.error?.errDescription,
-                        'First Name'),
-                    // Last name
-                    customTextField(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        const Align(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text('Add New Customer'),
+                          ),
+                        ),
+                        // First name
+                        CustomTextField(
                             (value) => context
-                            .read<AddCustomerBloc>()
-                            .add(OnLastNameChangeEvent(value)),
-                        state.lastName?.value??'',
-                        state.lastName?.error?.errDescription, 'Last Name'),
-                    // MobileNumber
-                    customTextField(  (value) => context
-                        .read<AddCustomerBloc>()
-                        .add(OnMobileChangeEvent(value)),
-                        state.mobile?.value??'',
-                        state.mobile?.error?.errDescription, 'mobile like: 0913*******'),
-                    // Email
-                    customTextField(  (value) => context
-                        .read<AddCustomerBloc>()
-                        .add(OnEmailChangeEvent(value)),
-                        state.email?.value??'',
-                        state.email?.error?.errDescription, 'Email'),
-                    // BankAccountNumber
-                    customTextField(  (value) => context
-                        .read<AddCustomerBloc>()
-                        .add(OnBackNumberChangeEvent(value)),
-                        state.accountNumber?.value??'',
-                        state.accountNumber?.error?.errDescription, 'BankAccountNumber'),
-                    OutlinedButton(
-                      onPressed: () => _selectDate(context),
-                      child: const Text('Select Date Of Birth'),
+                                .read<AddCustomerBloc>()
+                                .add(OnFirstNameChangeEvent(value)),
+                            state.firstName?.value ?? '',
+                            state.firstName?.error?.errDescription,
+                            'First Name'),
+                        // Last name
+                        CustomTextField(
+                            (value) => context
+                                .read<AddCustomerBloc>()
+                                .add(OnLastNameChangeEvent(value)),
+                            state.lastName?.value ?? '',
+                            state.lastName?.error?.errDescription,
+                            'Last Name'),
+                        // MobileNumber
+                        CustomTextField(
+                            (value) => context
+                                .read<AddCustomerBloc>()
+                                .add(OnMobileChangeEvent(value)),
+                            state.mobile?.value ?? '',
+                            state.mobile?.error?.errDescription,
+                            'mobile like: 0913*******'),
+                        // Email
+                        CustomTextField(
+                            (value) => context
+                                .read<AddCustomerBloc>()
+                                .add(OnEmailChangeEvent(value)),
+                            state.email?.value ?? '',
+                            state.email?.error?.errDescription,
+                            'Email'),
+                        // BankAccountNumber
+                        CustomTextField(
+                            (value) => context
+                                .read<AddCustomerBloc>()
+                                .add(OnBackNumberChangeEvent(value)),
+                            state.accountNumber?.value ?? '',
+                            state.accountNumber?.error?.errDescription,
+                            'BankAccountNumber'),
+                        if (state.dateOfBirth != null)
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Date of birth is: ${state.dateOfBirth!.value.toString().split(' ')[0]}',
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        OutlinedButton(
+                          onPressed: () async {
+                            final DateTime selectedDate =
+                                state.dateOfBirth?.value ?? DateTime.now();
+                            final DateTime? picked = await showDatePicker(
+                                context: context,
+                                initialDate: selectedDate,
+                                firstDate: DateTime(1920, 8),
+                                lastDate: DateTime(2021, 8));
+                            if (picked != null && picked != selectedDate) {
+                              context
+                                  .read<AddCustomerBloc>()
+                                  .add(OnDateOfBirthNumberChangeEvent(picked));
+                            }
+                          },
+                          child: Text(state.dateOfBirth == null
+                              ? 'Select Date Of Birth'
+                              : 'Edit date of birth'),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: OutlinedButton(
+                        onPressed: () {}, child: const Text('ADD CUSTOMER')),
+                  )
+                ],
               ),
             ),
           )),
-    );
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime selectedDate = DateTime.now();
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate) {
-      print(picked);
-    }
-  }
-
-  Widget customTextField(Function(String value) onChange, String initValue,
-      String ?err, String hint) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        onChanged: onChange,
-        initialValue: initValue,
-        decoration: InputDecoration(
-          errorText: err,
-          hintText: hint,
-          hintStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey,
-          ),
-          focusColor: Colors.white,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-          filled: true,
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red, width: 1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red, width: 1),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          errorStyle: const TextStyle(
-              color: Colors.red, fontWeight: FontWeight.bold, fontSize: 12),
-          fillColor: Colors.transparent,
-        ),
-      ),
     );
   }
 }

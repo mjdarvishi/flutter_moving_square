@@ -38,7 +38,7 @@ class OnBackNumberChangeEvent extends AddCustomerEvent {
 }
 
 class OnDateOfBirthNumberChangeEvent extends AddCustomerEvent {
-  final String value;
+  final DateTime value;
 
   const OnDateOfBirthNumberChangeEvent(this.value);
 }
