@@ -19,6 +19,13 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
     on<OnEmailChangeEvent>(_emailChange);
     on<OnBackNumberChangeEvent>(_accountChange);
     on<OnDateOfBirthNumberChangeEvent>(_birthChange);
+
+    on<SubmitEvent>(_submit);
+  }
+
+  void _submit(
+      SubmitEvent event, Emitter<AddCustomerState> emit) {
+
   }
 
   void _fistNameChange(

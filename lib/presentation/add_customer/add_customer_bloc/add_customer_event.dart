@@ -42,3 +42,6 @@ class OnDateOfBirthNumberChangeEvent extends AddCustomerEvent {
 
   const OnDateOfBirthNumberChangeEvent(this.value);
 }
+class SubmitEvent extends AddCustomerEvent{
+
+}

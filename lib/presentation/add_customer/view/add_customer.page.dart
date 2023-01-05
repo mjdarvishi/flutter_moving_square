@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:mc_crud_test/core/utils/validation/account.dart';
 import 'package:mc_crud_test/core/utils/validation/email.dart';
 import 'package:mc_crud_test/core/utils/validation/mobile.dart';
@@ -104,7 +105,8 @@ class AddCustomerPage extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: OutlinedButton(
-                        onPressed: () {}, child: const Text('ADD CUSTOMER')),
+                        onPressed: state.formZ.isValid ? ()=>context.read<AddCustomerBloc>().add(SubmitEvent()) : null,
+                        child: const Text('ADD CUSTOMER')),
                   )
                 ],
               ),
