@@ -29,7 +29,7 @@ class Mobile extends FormzInput<String, MobileValidationError> {
 }
 
 extension Explanation on MobileValidationError {
-  String get name {
+  String get errDescription {
     switch(this){
       case MobileValidationError.persian:
         return 'Just use english number';
@@ -38,7 +38,7 @@ extension Explanation on MobileValidationError {
       case MobileValidationError.min:
         return 'mix length must be 11';
       case MobileValidationError.empty:
-        return 'input number should not be empty';
+        return 'input email should not be empty';
     }
   }
 }

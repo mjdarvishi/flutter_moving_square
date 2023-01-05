@@ -26,7 +26,7 @@ class Email extends FormzInput<String, EmailValidationError> {
 }
 
 extension Explanation on EmailValidationError {
-  String get name {
+  String get errDescription {
     switch(this){
       case EmailValidationError.persian:
         return 'Just use english number';
