@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `CustomerEntity` (`id` INTEGER NOT NULL, `firstname` TEXT NOT NULL, `lastname` TEXT NOT NULL, `dateOfBirth` TEXT NOT NULL, `phoneNumber` TEXT NOT NULL, `email` TEXT NOT NULL, `bankAccountNumber` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Customer` (`id` INTEGER NOT NULL, `firstname` TEXT NOT NULL, `lastname` TEXT NOT NULL, `dateOfBirth` TEXT NOT NULL, `phoneNumber` TEXT NOT NULL, `email` TEXT NOT NULL, `bankAccountNumber` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -103,9 +103,24 @@ class _$CustomerDoa extends CustomerDoa {
   _$CustomerDoa(
     this.database,
     this.changeListener,
-  );
+  ) : _queryAdapter = QueryAdapter(database);
 
   final sqflite.DatabaseExecutor database;
 
   final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  @override
+  Future<List<Customer>> getAllArticles() async {
+    return _queryAdapter.queryList('SELECT * FROM customer_table',
+        mapper: (Map<String, Object?> row) => Customer(
+            row['id'] as int,
+            row['firstname'] as String,
+            row['lastname'] as String,
+            row['dateOfBirth'] as String,
+            row['phoneNumber'] as String,
+            row['email'] as String,
+            row['bankAccountNumber'] as String));
+  }
 }
