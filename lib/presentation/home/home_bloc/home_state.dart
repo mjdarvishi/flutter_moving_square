@@ -1,6 +1,6 @@
 part of 'home_bloc.dart';
 
-enum HomePageState { loading, home, err }
+enum HomePageState { loading, home,empty }
 
 class HomeState extends Equatable {
   //store the page state

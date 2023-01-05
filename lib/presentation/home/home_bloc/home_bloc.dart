@@ -17,7 +17,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   //get customers
   Future<void> _getCustomers(
       GetCustomerEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(state: HomePageState.loading));
     List<Customer> customers = await _getCustomersUseCase();
-    emit(state.copyWith(customers: customers));
+    emit(state.copyWith(
+        customers: customers,
+        state: customers.isEmpty ? HomePageState.empty : HomePageState.home));
   }
 }
