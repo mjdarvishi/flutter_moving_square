@@ -23,7 +23,7 @@ this is a simple application for test
 │   │   └───utils
 │   ├───data  => its part of clean architect and will handle communication to storage via floor
 │   │   └───data_sources
-│   │       ├───local
+│   │       ├───locnal
 │   │       │   └───DAOs
 │   │       ├───models
 │   │       └───repositories
@@ -33,6 +33,4 @@ this is a simple application for test
 │   │   └───usecase
 │   └───presentation => it has responsibility to render and hold files which are related to ui 
 ├───test
-
-
 </pre>
