@@ -1,5 +1,8 @@
+import 'package:floor/floor.dart';
 
+@entity
 class Customer {
+  @primaryKey
   final int id;
   final String firstname;
   final String lastname;
