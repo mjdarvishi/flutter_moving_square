@@ -15,18 +15,18 @@ class CustomerRepositoryImpl implements CustomerRepository {
     if (await _database.customerDao
             .checkBankAccountNumber(customer.bankAccountNumber) !=
         null) {
-      throw CustomException('bank count number is duplicate');
+      throw CustomException('* bank count number is duplicate');
     }
     if (await _database.customerDao.checkEmail(customer.email) != null) {
-      throw CustomException('email number is duplicate');
+      throw CustomException('* email number is duplicate');
     }
     if (await _database.customerDao.checkMobile(customer.phoneNumber) != null) {
-      throw CustomException('mobile number is duplicate');
+      throw CustomException('* mobile number is duplicate');
     }
     if (await _database.customerDao.checkInfo(
             customer.firstname, customer.lastname, customer.dateOfBirth) !=
         null) {
-      throw CustomException('user info is duplicate');
+      throw CustomException('* user info is duplicate');
     }
     await _database.customerDao.insertCustomer(customer);
   }

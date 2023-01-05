@@ -8,15 +8,17 @@ class AddCustomerState extends Equatable {
   final Mobile? mobile;
   final Birth? dateOfBirth;
   final FormzStatus formZ;
+  final String ?err;
   @override
   List<Object?> get props =>
-      [firstName, lastName, accountNumber, email, mobile, dateOfBirth,formZ];
+      [firstName, lastName, accountNumber, email, mobile, dateOfBirth,formZ,err];
 
   const AddCustomerState(
       {this.dateOfBirth ,
       this.mobile,
       this.email,
       this.accountNumber,
+        this.err,
         this.formZ=FormzStatus.pure,
       this.lastName,
       this.firstName});
@@ -29,11 +31,13 @@ class AddCustomerState extends Equatable {
     Mobile? mobile,
     FormzStatus ?formZ,
     Birth? dateOfBirth,
+    String ?err
   }) {
     return AddCustomerState(
         mobile: mobile ?? this.mobile,
         email: email ?? this.email,
         formZ: formZ??this.formZ,
+        err: err??this.err,
         accountNumber: accountNumber ?? this.accountNumber,
         dateOfBirth: dateOfBirth ?? this.dateOfBirth,
         firstName: firstName ?? this.firstName,

@@ -42,7 +42,7 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
               state.accountNumber!.value));
       Navigator.pop(ApplicationContext.navigatorKey.currentContext!);
     }on CustomException catch(err){
-        print(err.desc);
+       emit(state.copyWith(err: err.desc));
     }
   }
 

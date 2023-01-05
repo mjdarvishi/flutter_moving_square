@@ -98,7 +98,10 @@ class AddCustomerPage extends StatelessWidget {
                           child: Text(state.dateOfBirth == null
                               ? 'Select Date Of Birth'
                               : 'Edit date of birth'),
-                        )
+                        ),
+                        const SizedBox(height: 10,),
+                        if(state.err!=null)
+                        Text(state.err!,style: const TextStyle(color: Colors.red,fontSize: 17,fontWeight: FontWeight.bold),)
                       ],
                     ),
                   ),
