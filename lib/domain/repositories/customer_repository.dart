@@ -9,4 +9,6 @@ abstract class CustomerRepository {
   Future<void> addCustomer(Customer customer);
 
   Future<void> removeCustomer(Customer customer);
+
+  Future<void> updateCustomer(Customer customer);
 }

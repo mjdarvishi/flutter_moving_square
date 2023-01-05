@@ -6,6 +6,7 @@ import 'package:mc_crud_test/domain/repositories/customer_repository.dart';
 import 'package:mc_crud_test/domain/usecase/add_customers_usecase.dart';
 import 'package:mc_crud_test/domain/usecase/delete_customers_usecase.dart';
 import 'package:mc_crud_test/domain/usecase/get_customers_usecase.dart';
+import 'package:mc_crud_test/domain/usecase/update_customers_usecase.dart';
 import 'package:mc_crud_test/presentation/add_customer/add_customer_bloc/add_customer_bloc.dart';
 import 'package:mc_crud_test/presentation/home/home_bloc/home_bloc.dart';
 final injector = GetIt.instance;
@@ -26,12 +27,13 @@ Future<void> initializeDependencies() async {
   injector.registerSingleton<GetCustomersUseCase>(GetCustomersUseCase(injector()));
   injector.registerSingleton<AddCustomersUseCase>(AddCustomersUseCase(injector()));
   injector.registerSingleton<DeleteCustomersUseCase>(DeleteCustomersUseCase(injector()));
+  injector.registerSingleton<UpdateCustomersUseCase>(UpdateCustomersUseCase(injector()));
 
   //Bloc
   injector.registerFactory<HomeBloc>(
         () => HomeBloc( injector(),injector()),
   );
   injector.registerFactory<AddCustomerBloc>(
-        () => AddCustomerBloc(injector()),
+        () => AddCustomerBloc(injector(),injector()),
   );
 }

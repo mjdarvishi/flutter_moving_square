@@ -12,6 +12,7 @@ import 'package:mc_crud_test/core/utils/validation/mobile.dart';
 import 'package:mc_crud_test/core/utils/validation/name.dart';
 import 'package:mc_crud_test/domain/entities/customer.dart';
 import 'package:mc_crud_test/domain/usecase/add_customers_usecase.dart';
+import 'package:mc_crud_test/domain/usecase/update_customers_usecase.dart';
 
 part 'add_customer_event.dart';
 
@@ -19,8 +20,9 @@ part 'add_customer_state.dart';
 
 class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
   final AddCustomersUseCase _addCustomersUseCase;
+  final UpdateCustomersUseCase _updateCustomersUseCase;
 
-  AddCustomerBloc(this._addCustomersUseCase) : super(AddCustomerState()) {
+  AddCustomerBloc(this._addCustomersUseCase,this._updateCustomersUseCase) : super(AddCustomerState()) {
     on<OnFirstNameChangeEvent>(_fistNameChange);
     on<OnLastNameChangeEvent>(_lastNameChange);
     on<OnMobileChangeEvent>(_mobileChange);
@@ -66,7 +68,7 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
   }
   void _update(UpdateEvent event, Emitter<AddCustomerState> emit) async {
     try {
-      await _addCustomersUseCase(
+      await _updateCustomersUseCase(
           params: Customer(
               state.firstName!.value,
               state.lastName!.value,
