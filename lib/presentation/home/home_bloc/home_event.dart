@@ -7,3 +7,5 @@ List<Object> get props => [];
 
 const HomeEvent();
 }
+
+class GetCustomerEvent extends HomeEvent{}
