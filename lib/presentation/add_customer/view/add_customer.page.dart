@@ -20,7 +20,7 @@ class AddCustomerPage extends StatelessWidget {
                   // Last name
                   customTextField((value) {}, '', 'err', 'Last Name'),
                   // PhoneNumber
-                  customTextField((value) {}, '', 'err', 'Phone Number'),
+                  customTextField((value) {}, '', 'err', '0913*******'),
                   // Email
                   customTextField((value) {}, '', 'err', 'Email'),
                   // BankAccountNumber
