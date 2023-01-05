@@ -214,7 +214,7 @@ class _$CustomerDoa extends CustomerDoa {
   }
 
   @override
-  Future<void> deleteCustomer(Customer article) async {
-    await _customerDeletionAdapter.delete(article);
+  Future<void> deleteCustomer(Customer customer) async {
+    await _customerDeletionAdapter.delete(customer);
   }
 }

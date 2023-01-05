@@ -1,8 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
-import 'package:flutter/cupertino.dart';
 
 @entity
-class Customer {
+class Customer extends Equatable{
   @PrimaryKey(autoGenerate: true)
   final int? id;
   final String firstname;
@@ -14,4 +14,7 @@ class Customer {
 
   Customer(this.firstname, this.lastname, this.dateOfBirth,
       this.phoneNumber, this.email, this.bankAccountNumber,{this.id});
+
+  @override
+  List<Object?> get props =>[id,firstname,lastname,dateOfBirth,phoneNumber,email,bankAccountNumber];
 }

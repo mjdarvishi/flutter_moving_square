@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                         case HomePageState.loading:
                           return const LoadingWidget();
                         case HomePageState.home:
-                          return const HomeList();
+                          return  HomeList();
                         case HomePageState.empty:
                           return const EmptyWidget();
                       }
