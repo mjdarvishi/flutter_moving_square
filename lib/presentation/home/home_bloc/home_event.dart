@@ -9,3 +9,9 @@ const HomeEvent();
 }
 //get customer event
 class GetCustomerEvent extends HomeEvent{}
+
+class DeleteCustomerEvent extends HomeEvent{
+  final Customer customer;
+
+  const DeleteCustomerEvent(this.customer);
+}

@@ -27,5 +27,5 @@ abstract class CustomerDoa {
   Future<void> insertCustomer(Customer article);
 
   @delete
-  Future<void> deleteCustomer(Customer article);
+  Future<void> deleteCustomer(Customer customer);
 }

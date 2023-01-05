@@ -47,8 +47,7 @@ class CustomerRepositoryImpl implements CustomerRepository {
   }
 
   @override
-  Future<void> removeCustomer(Customer customer) {
-    // TODO: implement removeCustomer
-    throw UnimplementedError();
+  Future<void> removeCustomer(Customer customer) async{
+      await _database.customerDao.deleteCustomer(customer);
   }
 }

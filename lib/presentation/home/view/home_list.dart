@@ -39,14 +39,17 @@ class HomeList extends StatelessWidget {
             ),
             Column(
               mainAxisSize: MainAxisSize.max,
-              children: const [
-                Icon(
-                  Icons.delete_sharp,
-                  color: Colors.red,
-                  size: 30,
+              children:  [
+                GestureDetector(
+                  onTap: () => bloc.add(DeleteCustomerEvent(bloc.state.customers[index])),
+                  child: const Icon(
+                    Icons.delete_sharp,
+                    color: Colors.red,
+                    size: 30,
+                  ),
                 ),
-                SizedBox(height: 25,),
-                Icon(
+                const SizedBox(height: 25,),
+                const Icon(
                   Icons.edit_note_sharp,
                   color: Colors.blue,
                   size: 30,
