@@ -30,7 +30,6 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
   void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) {
     _addCustomersUseCase(
         params: Customer(
-            1,
             state.firstName!.value,
             state.lastName!.value,
             state.dateOfBirth!.value.toString().split(' ')[0],

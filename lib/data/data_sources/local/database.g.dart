@@ -144,13 +144,13 @@ class _$CustomerDoa extends CustomerDoa {
   Future<List<Customer>> getAllArticles() async {
     return _queryAdapter.queryList('SELECT * FROM Customer',
         mapper: (Map<String, Object?> row) => Customer(
-            row['id'] as int,
             row['firstname'] as String,
             row['lastname'] as String,
             row['dateOfBirth'] as String,
             row['phoneNumber'] as String,
             row['email'] as String,
-            row['bankAccountNumber'] as String));
+            row['bankAccountNumber'] as String,
+            id: row['id'] as int));
   }
 
   @override
