@@ -3,7 +3,9 @@ part of 'home_bloc.dart';
 enum HomePageState { loading, home, err }
 
 class HomeState extends Equatable {
+  //store the page state
   final HomePageState state;
+  //store list of customer
   final List<Customer> customers;
 
   @override

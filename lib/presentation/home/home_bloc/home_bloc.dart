@@ -11,6 +11,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<GetCustomerEvent>(_getCustomers);
   }
 
+  //get customers
   Future<void> _getCustomers(
       GetCustomerEvent event, Emitter<HomeState> emit) async {
 
