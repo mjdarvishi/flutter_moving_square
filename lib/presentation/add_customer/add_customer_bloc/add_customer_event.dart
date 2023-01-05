@@ -50,7 +50,7 @@ class UpdateEvent extends AddCustomerEvent{
   UpdateEvent(this.customer);
 }
 class InitEvent extends AddCustomerEvent{
-  final Customer customer;
+  final Customer? customer;
 
   InitEvent(this.customer);
 }

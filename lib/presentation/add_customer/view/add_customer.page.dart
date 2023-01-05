@@ -20,17 +20,14 @@ class AddCustomerPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
           create: (context) {
-            final bloc = injector<AddCustomerBloc>();
-            if (customer != null) {
-              bloc.add(InitEvent(customer!));
-            }
-            return bloc;
+            return injector<AddCustomerBloc>()..add(InitEvent(customer));
           },
           child: BlocBuilder<AddCustomerBloc, AddCustomerState>(
             builder: (context, state) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(
                 children: [
+                  if(state.dataInitialized)
                   Expanded(
                     child: ListView(
                       children: [

@@ -34,14 +34,19 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
   }
 
   void _init(InitEvent event, Emitter<AddCustomerState> emit){
-    emit(state.copyWith(
-      firstName: Name.dirty(value: event.customer.firstname),
-      lastName: Name.dirty(value: event.customer.lastname),
-      email: Email.dirty(value: event.customer.email),
-      mobile: Mobile.dirty(value: event.customer.phoneNumber),
-      accountNumber: Account.dirty(value: event.customer.bankAccountNumber),
-      dateOfBirth: Birth.dirty(DateTime.parse(event.customer.dateOfBirth)),
-    ));
+    if(event.customer==null){
+      emit(state.copyWith(dataInitialized: true));
+    }else{
+      emit(state.copyWith(
+        dataInitialized: true,
+        firstName: Name.dirty(value: event.customer!.firstname),
+        lastName: Name.dirty(value: event.customer!.lastname),
+        email: Email.dirty(value: event.customer!.email),
+        mobile: Mobile.dirty(value: event.customer!.phoneNumber),
+        accountNumber: Account.dirty(value: event.customer!.bankAccountNumber),
+        dateOfBirth: Birth.dirty(DateTime.parse(event.customer!.dateOfBirth)),
+      ));
+    }
   }
 
   void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) async {
