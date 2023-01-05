@@ -2,8 +2,6 @@ import 'package:mc_crud_test/core/usecase.dart';
 import 'package:mc_crud_test/domain/entities/customer.dart';
 import 'package:mc_crud_test/domain/repositories/customer_repository.dart';
 
-
-
 class AddCustomersUseCase implements UseCase<void, Customer> {
   final CustomerRepository _customerRepository;
 
@@ -11,6 +9,11 @@ class AddCustomersUseCase implements UseCase<void, Customer> {
 
   @override
   Future<void> call({ Customer? params}) {
-    return _customerRepository.addCustomer(params!);
+     try{
+       return _customerRepository.addCustomer(params!);
+     }catch(err){
+       rethrow;
+     }
   }
 }
+

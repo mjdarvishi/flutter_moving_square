@@ -154,6 +154,61 @@ class _$CustomerDoa extends CustomerDoa {
   }
 
   @override
+  Future<Customer?> checkBankAccountNumber(String bankAccountNumber) async {
+    return _queryAdapter.query(
+        'SELECT * FROM Customer WHERE bankAccountNumber= ?1',
+        mapper: (Map<String, Object?> row) => Customer(
+            row['firstname'] as String,
+            row['lastname'] as String,
+            row['dateOfBirth'] as String,
+            row['phoneNumber'] as String,
+            row['email'] as String,
+            row['bankAccountNumber'] as String,
+            id: row['id'] as int?),
+        arguments: [bankAccountNumber]);
+  }
+
+  @override
+  Future<Customer?> checkEmail(String email) async {
+    return _queryAdapter.query('SELECT * FROM Customer WHERE email= ?1',
+        mapper: (Map<String, Object?> row) => Customer(
+            row['firstname'] as String,
+            row['lastname'] as String,
+            row['dateOfBirth'] as String,
+            row['phoneNumber'] as String,
+            row['email'] as String,
+            row['bankAccountNumber'] as String,
+            id: row['id'] as int?),
+        arguments: [email]);
+  }
+
+  @override
+  Future<Customer?> checkMobile(String mobile) async {
+    return _queryAdapter.query('SELECT * FROM Customer WHERE phoneNumber= ?1',
+        mapper: (Map<String, Object?> row) => Customer(
+            row['firstname'] as String,
+            row['lastname'] as String,
+            row['dateOfBirth'] as String,
+            row['phoneNumber'] as String,
+            row['email'] as String,
+            row['bankAccountNumber'] as String,
+            id: row['id'] as int?),
+        arguments: [mobile]);
+  }
+
+  @override
+  Future<Customer?> checkInfo(
+    String firstname,
+    String lastname,
+    String dateOfBirth,
+  ) async {
+    return _queryAdapter.query(
+        'SELECT * FROM Customer WHERE firstname= ?1 AND lastname=?2 AND dateOfBirth=?3',
+        mapper: (Map<String, Object?> row) => Customer(row['firstname'] as String, row['lastname'] as String, row['dateOfBirth'] as String, row['phoneNumber'] as String, row['email'] as String, row['bankAccountNumber'] as String, id: row['id'] as int?),
+        arguments: [firstname, lastname, dateOfBirth]);
+  }
+
+  @override
   Future<void> insertCustomer(Customer article) async {
     await _customerInsertionAdapter.insert(article, OnConflictStrategy.replace);
   }

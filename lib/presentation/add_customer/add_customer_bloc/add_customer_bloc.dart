@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
+import 'package:mc_crud_test/core/utils/application_context.dart';
+import 'package:mc_crud_test/core/utils/exception/CustomException.dart';
 import 'package:mc_crud_test/core/utils/validation/account.dart';
 import 'package:mc_crud_test/core/utils/validation/birth.dart';
 import 'package:mc_crud_test/core/utils/validation/email.dart';
@@ -29,14 +31,19 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
   }
 
   void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) async{
-   await _addCustomersUseCase(
-        params: Customer(
-            state.firstName!.value,
-            state.lastName!.value,
-            state.dateOfBirth!.value.toString().split(' ')[0],
-            state.mobile!.value,
-            state.email!.value,
-            state.accountNumber!.value));
+    try{
+      await _addCustomersUseCase(
+          params: Customer(
+              state.firstName!.value,
+              state.lastName!.value,
+              state.dateOfBirth!.value.toString().split(' ')[0],
+              state.mobile!.value,
+              state.email!.value,
+              state.accountNumber!.value));
+      Navigator.pop(ApplicationContext.navigatorKey.currentContext!);
+    }on CustomException catch(err){
+        print(err.desc);
+    }
   }
 
   void _fistNameChange(

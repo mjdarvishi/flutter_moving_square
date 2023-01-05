@@ -110,7 +110,6 @@ class AddCustomerPage extends StatelessWidget {
                           context
                               .read<AddCustomerBloc>()
                               .add(SubmitEvent());
-                          Navigator.pop(context);
                         }
                             : null,
                         child: const Text('ADD CUSTOMER')),
