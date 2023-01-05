@@ -10,7 +10,7 @@ class AppRoutes {
       case '/':
         return _materialRoute( HomePage());
       case '/add':
-        return _materialRoute(AddCustomerPage(settings.arguments as VoidCallback));
+        return _materialRoute(AddCustomerPage());
       default:
         return _materialRoute( HomePage());
     }

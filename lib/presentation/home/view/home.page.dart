@@ -17,10 +17,9 @@ class HomePage extends StatelessWidget {
             Scaffold(
               floatingActionButton: FloatingActionButton(
                   onPressed: () =>
-                      Navigator.pushNamed(context, '/add', arguments: () {
-                        Navigator.pop(context);
-                        bloc.add(GetCustomerEvent());
-                      }),
+                      Navigator.pushNamed(context, '/add').then((value) =>
+                          bloc.add(GetCustomerEvent())
+                      ),
                   child: const Icon(
                     Icons.add,
                     color: Colors.white,

@@ -10,9 +10,7 @@ import 'package:mc_crud_test/presentation/add_customer/add_customer_bloc/add_cus
 import 'package:mc_crud_test/presentation/add_customer/view/custom_text_field.dart';
 
 class AddCustomerPage extends StatelessWidget {
-  final VoidCallback callback;
-
-  const AddCustomerPage(this.callback);
+  const AddCustomerPage();
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +106,12 @@ class AddCustomerPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: OutlinedButton(
                         onPressed: state.formZ.isValid
-                            ? () => context
-                                .read<AddCustomerBloc>()
-                                .add(SubmitEvent(callback))
+                            ? (){
+                          context
+                              .read<AddCustomerBloc>()
+                              .add(SubmitEvent());
+                          Navigator.pop(context);
+                        }
                             : null,
                         child: const Text('ADD CUSTOMER')),
                   )

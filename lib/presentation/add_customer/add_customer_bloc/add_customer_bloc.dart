@@ -37,7 +37,6 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
             state.mobile!.value,
             state.email!.value,
             state.accountNumber!.value));
-   event.callback();
   }
 
   void _fistNameChange(
