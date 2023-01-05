@@ -10,4 +10,10 @@ abstract class CustomerDoa {
   @Query('SELECT * FROM $customerTableName')
   Future<List<Customer>> getAllArticles();
 
+  @Insert(onConflict: OnConflictStrategy.replace)
+  Future<void> insertCustomer(Customer article);
+
+  @delete
+  Future<void> deleteCustomer(Customer article);
+
 }

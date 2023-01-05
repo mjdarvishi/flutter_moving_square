@@ -3,20 +3,19 @@ import 'package:mc_crud_test/domain/entities/customer.dart';
 import 'package:mc_crud_test/domain/repositories/customer_repository.dart';
 
 //implementation of CustomerRepository
-class CustomerRepositoryImpl implements CustomerRepository{
+class CustomerRepositoryImpl implements CustomerRepository {
   final AppDatabase _database;
 
-  const CustomerRepositoryImpl( this._database);
+  const CustomerRepositoryImpl(this._database);
 
   @override
-  Future<void> addCustomer(Customer customer) {
-    // TODO: implement addCustomer
-    throw UnimplementedError();
+  Future<void> addCustomer(Customer customer) async {
+    await _database.customerDao.insertCustomer(customer);
   }
 
   @override
-  Future<List<Customer>> getCustomers() async{
-    List<Customer> customers=await _database.personDao.getAllArticles();
+  Future<List<Customer>> getCustomers() async {
+    List<Customer> customers = await _database.customerDao.getAllArticles();
     return customers;
   }
 
@@ -31,5 +30,4 @@ class CustomerRepositoryImpl implements CustomerRepository{
     // TODO: implement removeCustomer
     throw UnimplementedError();
   }
-
 }

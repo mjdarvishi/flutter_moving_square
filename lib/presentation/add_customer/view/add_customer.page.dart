@@ -88,7 +88,7 @@ class AddCustomerPage extends StatelessWidget {
                                 context: context,
                                 initialDate: selectedDate,
                                 firstDate: DateTime(1920, 8),
-                                lastDate: DateTime(2021, 8));
+                                lastDate: DateTime.now());
                             if (picked != null && picked != selectedDate) {
                               context
                                   .read<AddCustomerBloc>()
@@ -105,7 +105,11 @@ class AddCustomerPage extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: OutlinedButton(
-                        onPressed: state.formZ.isValid ? ()=>context.read<AddCustomerBloc>().add(SubmitEvent()) : null,
+                        onPressed: state.formZ.isValid
+                            ? () => context
+                                .read<AddCustomerBloc>()
+                                .add(SubmitEvent())
+                            : null,
                         child: const Text('ADD CUSTOMER')),
                   )
                 ],

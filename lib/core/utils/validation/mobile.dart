@@ -36,7 +36,7 @@ extension Explanation on MobileValidationError {
       case MobileValidationError.invalid:
         return 'invalid format';
       case MobileValidationError.min:
-        return 'mix length must be 11';
+        return 'min length must be 11';
       case MobileValidationError.empty:
         return 'input email should not be empty';
     }

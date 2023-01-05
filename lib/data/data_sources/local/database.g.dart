@@ -61,7 +61,7 @@ class _$AppDatabase extends AppDatabase {
     changeListener = listener ?? StreamController<String>.broadcast();
   }
 
-  CustomerDoa? _personDaoInstance;
+  CustomerDoa? _customerDaoInstance;
 
   Future<sqflite.Database> open(
     String path,
@@ -94,8 +94,8 @@ class _$AppDatabase extends AppDatabase {
   }
 
   @override
-  CustomerDoa get personDao {
-    return _personDaoInstance ??= _$CustomerDoa(database, changeListener);
+  CustomerDoa get customerDao {
+    return _customerDaoInstance ??= _$CustomerDoa(database, changeListener);
   }
 }
 
@@ -103,13 +103,42 @@ class _$CustomerDoa extends CustomerDoa {
   _$CustomerDoa(
     this.database,
     this.changeListener,
-  ) : _queryAdapter = QueryAdapter(database);
+  )   : _queryAdapter = QueryAdapter(database),
+        _customerInsertionAdapter = InsertionAdapter(
+            database,
+            'Customer',
+            (Customer item) => <String, Object?>{
+                  'id': item.id,
+                  'firstname': item.firstname,
+                  'lastname': item.lastname,
+                  'dateOfBirth': item.dateOfBirth,
+                  'phoneNumber': item.phoneNumber,
+                  'email': item.email,
+                  'bankAccountNumber': item.bankAccountNumber
+                }),
+        _customerDeletionAdapter = DeletionAdapter(
+            database,
+            'Customer',
+            ['id'],
+            (Customer item) => <String, Object?>{
+                  'id': item.id,
+                  'firstname': item.firstname,
+                  'lastname': item.lastname,
+                  'dateOfBirth': item.dateOfBirth,
+                  'phoneNumber': item.phoneNumber,
+                  'email': item.email,
+                  'bankAccountNumber': item.bankAccountNumber
+                });
 
   final sqflite.DatabaseExecutor database;
 
   final StreamController<String> changeListener;
 
   final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<Customer> _customerInsertionAdapter;
+
+  final DeletionAdapter<Customer> _customerDeletionAdapter;
 
   @override
   Future<List<Customer>> getAllArticles() async {
@@ -122,5 +151,15 @@ class _$CustomerDoa extends CustomerDoa {
             row['phoneNumber'] as String,
             row['email'] as String,
             row['bankAccountNumber'] as String));
+  }
+
+  @override
+  Future<void> insertCustomer(Customer article) async {
+    await _customerInsertionAdapter.insert(article, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> deleteCustomer(Customer article) async {
+    await _customerDeletionAdapter.delete(article);
   }
 }
