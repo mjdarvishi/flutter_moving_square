@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mc_crud_test/domain/entities/customer.dart';
 import 'package:mc_crud_test/presentation/add_customer/view/add_customer.page.dart';
 import 'package:mc_crud_test/presentation/home/view/home.page.dart';
 
@@ -10,7 +11,11 @@ class AppRoutes {
       case '/':
         return _materialRoute( HomePage());
       case '/add':
-        return _materialRoute(AddCustomerPage());
+        if(settings.arguments!=null) {
+          return _materialRoute(AddCustomerPage(customer: settings.arguments as Customer,));
+        }else{
+          return _materialRoute(AddCustomerPage());
+        }
       default:
         return _materialRoute( HomePage());
     }

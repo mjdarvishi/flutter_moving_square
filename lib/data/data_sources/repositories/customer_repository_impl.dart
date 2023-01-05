@@ -11,6 +11,12 @@ class CustomerRepositoryImpl implements CustomerRepository {
 
   @override
   Future<void> addCustomer(Customer customer) async {
+    //update existing customer
+    if(customer.id!=null){
+      await _database.customerDao.insertCustomer(customer);
+      return;
+    }
+    //check the rules for new customer
     List<String> errors = [];
     if (await _database.customerDao
             .checkBankAccountNumber(customer.bankAccountNumber) !=
@@ -31,6 +37,7 @@ class CustomerRepositoryImpl implements CustomerRepository {
     if (errors.isNotEmpty) {
       throw CustomException(errors);
     }
+    //add new customer
     await _database.customerDao.insertCustomer(customer);
   }
 

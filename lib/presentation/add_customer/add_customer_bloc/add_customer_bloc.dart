@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:floor/floor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
 import 'package:mc_crud_test/core/utils/application_context.dart';
@@ -27,11 +28,24 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
     on<OnBackNumberChangeEvent>(_accountChange);
     on<OnDateOfBirthNumberChangeEvent>(_birthChange);
 
+    on<InitEvent>(_init);
     on<SubmitEvent>(_submit);
+    on<UpdateEvent>(_update);
   }
 
-  void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) async{
-    try{
+  void _init(InitEvent event, Emitter<AddCustomerState> emit){
+    emit(state.copyWith(
+      firstName: Name.dirty(value: event.customer.firstname),
+      lastName: Name.dirty(value: event.customer.lastname),
+      email: Email.dirty(value: event.customer.email),
+      mobile: Mobile.dirty(value: event.customer.phoneNumber),
+      accountNumber: Account.dirty(value: event.customer.bankAccountNumber),
+      dateOfBirth: Birth.dirty(DateTime.parse(event.customer.dateOfBirth)),
+    ));
+  }
+
+  void _submit(SubmitEvent event, Emitter<AddCustomerState> emit) async {
+    try {
       await _addCustomersUseCase(
           params: Customer(
               state.firstName!.value,
@@ -41,8 +55,23 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
               state.email!.value,
               state.accountNumber!.value));
       Navigator.pop(ApplicationContext.navigatorKey.currentContext!);
-    }on CustomException catch(err){
-       emit(state.copyWith(err: err.desc));
+    } on CustomException catch (err) {
+      emit(state.copyWith(err: err.desc));
+    }
+  }
+  void _update(UpdateEvent event, Emitter<AddCustomerState> emit) async {
+    try {
+      await _addCustomersUseCase(
+          params: Customer(
+              state.firstName!.value,
+              state.lastName!.value,
+              state.dateOfBirth!.value.toString().split(' ')[0],
+              state.mobile!.value,
+              state.email!.value,
+              state.accountNumber!.value,id: event.customer.id));
+      Navigator.pop(ApplicationContext.navigatorKey.currentContext!);
+    } on CustomException catch (err) {
+      emit(state.copyWith(err: err.desc));
     }
   }
 

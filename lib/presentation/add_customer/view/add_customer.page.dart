@@ -5,18 +5,27 @@ import 'package:mc_crud_test/core/utils/validation/account.dart';
 import 'package:mc_crud_test/core/utils/validation/email.dart';
 import 'package:mc_crud_test/core/utils/validation/mobile.dart';
 import 'package:mc_crud_test/core/utils/validation/name.dart';
+import 'package:mc_crud_test/domain/entities/customer.dart';
 import 'package:mc_crud_test/injector.dart';
 import 'package:mc_crud_test/presentation/add_customer/add_customer_bloc/add_customer_bloc.dart';
 import 'package:mc_crud_test/presentation/add_customer/view/custom_text_field.dart';
 
 class AddCustomerPage extends StatelessWidget {
-  const AddCustomerPage();
+  final Customer? customer;
+
+  const AddCustomerPage({this.customer});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-          create: (context) => injector<AddCustomerBloc>(),
+          create: (context) {
+            final bloc = injector<AddCustomerBloc>();
+            if (customer != null) {
+              bloc.add(InitEvent(customer!));
+            }
+            return bloc;
+          },
           child: BlocBuilder<AddCustomerBloc, AddCustomerState>(
             builder: (context, state) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -25,10 +34,12 @@ class AddCustomerPage extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       children: [
-                        const Align(
+                        Align(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text('Add New Customer'),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(customer == null
+                                ? 'Add New Customer'
+                                : 'Update Customer'),
                           ),
                         ),
                         // First name
@@ -118,12 +129,20 @@ class AddCustomerPage extends StatelessWidget {
                     child: OutlinedButton(
                         onPressed: state.formZ.isValid
                             ? () {
-                                context
-                                    .read<AddCustomerBloc>()
-                                    .add(SubmitEvent());
+                                if (customer == null) {
+                                  context
+                                      .read<AddCustomerBloc>()
+                                      .add(SubmitEvent());
+                                } else {
+                                  context
+                                      .read<AddCustomerBloc>()
+                                      .add(UpdateEvent(customer!));
+                                }
                               }
                             : null,
-                        child: const Text('ADD CUSTOMER')),
+                        child: Text(customer == null
+                            ? 'ADD CUSTOMER'
+                            : 'UPDATE CUSTOMER')),
                   )
                 ],
               ),
