@@ -1,3 +1,3 @@
 const String appTitle = 'TestApp';
-const String customerTableName = 'customer_table';
+const String customerTableName = 'Customer';
 const String databaseName = 'test_db';

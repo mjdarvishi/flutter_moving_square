@@ -4,12 +4,15 @@ class EmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Icon(Icons.hourglass_empty,size: 35,),
-        SizedBox(height: 20,),
-        Text('There is no Customer')
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.hourglass_empty,size: 50,),
+          SizedBox(height: 20,),
+          Text('There is no Customer',)
+        ],
+      ),
     );
   }
 }
