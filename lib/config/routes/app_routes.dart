@@ -7,9 +7,9 @@ class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return _materialRoute( SquareWidget());
+        return _materialRoute( MyApp());
       default:
-        return _materialRoute( SquareWidget());
+        return _materialRoute( MyApp());
     }
   }
 
